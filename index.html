@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El universo entre nosotros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noche:#0a0d1f; --noche2:#121734; --plata:#e8e4d8; --tenue:#9a9fb8;
+  --cobre:#d4694a; --cobre-suave:#f0a98f; --linea:#2a3158;
+  --cat-fen:#8fb4ff; --cat-exp:#e9c46a; --cat-his:#f0a98f; --cat-des:#9be3c4;
+  --serif:'Fraunces',Georgia,serif; --sans:'Outfit',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{background:var(--noche);color:var(--plata);font:300 1.05rem/1.65 var(--sans);
+  background-image:
+    radial-gradient(1px 1px at 12% 18%,#fff9 50%,transparent 51%),
+    radial-gradient(1px 1px at 78% 8%,#fff7 50%,transparent 51%),
+    radial-gradient(1.5px 1.5px at 40% 55%,#fff8 50%,transparent 51%),
+    radial-gradient(1px 1px at 90% 70%,#fff6 50%,transparent 51%),
+    radial-gradient(1px 1px at 25% 85%,#fff7 50%,transparent 51%);
+  background-size:420px 420px,530px 530px,610px 610px,380px 380px,470px 470px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cobre-suave);outline-offset:3px}
+
+/* Hero: eclipse que se desliza una sola vez */
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:4rem 1.5rem 6rem;
+  padding-top:calc(4rem + env(safe-area-inset-top,0px))}
+.luna{width:min(46vw,220px);aspect-ratio:1;border-radius:50%;margin:0 auto 2.5rem;position:relative;overflow:hidden;
+  background:radial-gradient(circle at 35% 35%,#f4efe2,#cfc8b4 60%,#9a937f);box-shadow:0 0 80px #e8e4d822}
+.luna::after{content:"";position:absolute;inset:-5%;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,#7a2a1c 0 45%,#2a0f16 80%);
+  transform:translateX(-110%);animation:eclipse 14s .6s ease-in-out forwards;mix-blend-mode:multiply}
+@keyframes eclipse{to{transform:translateX(0)}}
+h1{font:300 clamp(2.4rem,7vw,4.8rem)/1.05 var(--serif);letter-spacing:-.02em;max-width:14ch;margin:0 auto 1.2rem}
+.hero p{color:var(--tenue);max-width:34ch;margin:0 auto 2rem}
+.bajar{display:inline-block;color:var(--cobre-suave);text-decoration:none;border-bottom:1px solid var(--cobre);padding-bottom:2px}
+
+/* Barra */
+.barra{position:sticky;top:0;z-index:5;background:#0a0d1fd9;backdrop-filter:blur(10px);border-bottom:1px solid var(--linea);
+  padding:.7rem 1rem;padding-top:calc(.7rem + env(safe-area-inset-top,0px))}
+.barra div{max-width:880px;margin:auto;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:space-between}
+.grupo{display:flex;flex-wrap:wrap;gap:.4rem}
+button,.chip{font:400 .9rem var(--sans);color:var(--plata);background:transparent;border:1px solid var(--linea);
+  border-radius:999px;padding:.3rem .9rem;cursor:pointer;text-decoration:none}
+button[aria-pressed=true]{background:var(--plata);color:var(--noche);border-color:var(--plata)}
+button:hover{border-color:var(--tenue)}
+
+/* Línea de tiempo */
+main{max-width:880px;margin:0 auto;padding:3rem 1.25rem 2rem}
+.anio{margin-bottom:4rem}
+.anio>h2{font:300 clamp(2.6rem,8vw,4.5rem)/1 var(--serif);color:var(--cobre-suave);margin-bottom:.3rem}
+.anio>.rango{color:var(--tenue);margin-bottom:2rem}
+.lista{list-style:none;padding:0 0 0 1.6rem;border-left:1px solid var(--linea);display:grid;gap:2rem}
+.ev{position:relative}
+.ev::before{content:"";position:absolute;left:calc(-1.6rem - 5px);top:.55rem;width:9px;height:9px;border-radius:50%;
+  background:var(--c);box-shadow:0 0 0 4px var(--noche),0 0 14px var(--c)}
+.ev[data-cat=fenomeno]{--c:var(--cat-fen)} .ev[data-cat=exploracion]{--c:var(--cat-exp)}
+.ev[data-cat=hito]{--c:var(--cat-his)} .ev[data-cat=descubrimiento]{--c:var(--cat-des)}
+.ev time{color:var(--c);font-weight:500;font-size:.95rem}
+.ev .tipo{color:var(--tenue);font-size:.9rem;margin-left:.6rem}
+.ev h3{font:600 1.5rem/1.2 var(--serif);margin:.2rem 0 .8rem}
+.foto{aspect-ratio:16/9;border-radius:6px;overflow:hidden;margin-bottom:.9rem;
+  background:linear-gradient(135deg,var(--noche2),#1d2150 60%,color-mix(in srgb,var(--c) 30%,var(--noche2)))}
+.foto img{width:100%;height:100%;object-fit:cover;display:block}
+.ev p{max-width:62ch}
+.col{color:var(--tenue);font-size:.95rem;margin-top:.4rem}
+.nota{margin-top:.8rem;padding-left:1rem;border-left:2px solid var(--cobre);font:300 1.1rem/1.5 var(--serif);font-style:italic}
+.fuente{display:inline-block;margin-top:.6rem;font-size:.85rem;color:var(--tenue)}
+.vacio{color:var(--tenue);padding:2rem 0}
+
+/* Final */
+.final{text-align:center;padding:6rem 1.5rem 7rem;border-top:1px solid var(--linea);
+  background:radial-gradient(60% 50% at 50% 100%,#d4694a22,transparent)}
+.final h2{font:300 clamp(2rem,6vw,3.4rem)/1.1 var(--serif);max-width:16ch;margin:0 auto 1rem}
+.final p{color:var(--tenue);max-width:40ch;margin:0 auto 2rem}
+.video{display:inline-block;background:var(--cobre);color:#fff;border:0;border-radius:999px;padding:.8rem 2rem;font:500 1.05rem var(--sans);text-decoration:none}
+.video[aria-disabled=true]{background:var(--linea);color:var(--tenue);pointer-events:none}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .luna::after{animation:none;transform:translateX(-30%)}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div>
+    <div class="luna" role="img" aria-label="Luna entrando en eclipse"></div>
+    <h1>El universo entre nosotros</h1>
+    <p>Dos años de cielo, del 6 de octubre de 2024 al 6 de octubre de 2026.</p>
+    <a class="bajar" href="#cronologia">Empezar el recorrido</a>
+  </div>
+</header>
+
+<nav class="barra" aria-label="Filtros de la cronología" id="cronologia">
+  <div>
+    <div class="grupo" id="f-anio" role="group" aria-label="Año"></div>
+    <div class="grupo" id="f-cat" role="group" aria-label="Categoría"></div>
+  </div>
+</nav>
+
+<main id="linea"></main>
+
+<section class="final" id="final">
+  <h2>Y el cielo sigue ahí</h2>
+  <p>Hay una última cosa para ti.</p>
+  <a class="video" id="video" href="#" target="_blank" rel="noopener">Ver el video</a>
+</section>
+
+<script>
+/* ====== CONFIGURACIÓN ====== */
+// Pega aquí el enlace de tu video de YouTube (privado o no listado).
+const VIDEO_URL = "https://youtu.be/BF3I9OHF5dA";
+
+const CATEGORIAS = {
+  fenomeno:"Fenómeno astronómico", exploracion:"Exploración",
+  hito:"Hito histórico", descubrimiento:"Descubrimiento"
+};
+
+/* Cada evento: fecha (para ordenar), cuando (texto), titulo, cat, lugar, texto, img, fuente, nota (opcional, tu mensaje) */
+const EVENTOS = [
+ {fecha:"2024-10-12",cuando:"12–13 de octubre de 2024",titulo:"El cometa Tsuchinshan-ATLAS se acerca a la Tierra",cat:"fenomeno",lugar:"Visible al atardecer en varias partes del mundo",texto:"El cometa C/2023 A3 pasó relativamente cerca y dejó una cola brillante sobre el horizonte. Fue uno de los grandes espectáculos de octubre de 2024.",img:"tsuchinshan-atlas.jpg",fuente:"https://science.nasa.gov/",nota:""},
+ {fecha:"2024-10-14",cuando:"14 de octubre de 2024",titulo:"Despega Europa Clipper",cat:"exploracion",lugar:"NASA, Cabo Cañaveral",texto:"Una nave de la NASA parte hacia Europa, la luna helada de Júpiter, bajo cuya superficie se sospecha que hay un océano de agua líquida.",img:"europa-clipper.jpg",fuente:"https://www.nasa.gov/",nota:""},
+ {fecha:"2024-12-24",cuando:"24 de diciembre de 2024",titulo:"Parker Solar Probe roza el Sol",cat:"exploracion",lugar:"Atmósfera exterior del Sol",texto:"La sonda pasó a unos 6,1 millones de kilómetros de la superficie solar, la aproximación más cercana de una nave a nuestra estrella.",img:"parker-solar-probe.jpg",fuente:"https://www.nasa.gov/",nota:""},
+ {fecha:"2025-03-02",cuando:"2 de marzo de 2025",titulo:"Blue Ghost aterriza en la Luna",cat:"exploracion",lugar:"Luna",texto:"La misión de Firefly Aerospace aterrizó con éxito y llevó instrumentos científicos para estudiar el entorno lunar. Un hito para las empresas privadas.",img:"blue-ghost.jpg",fuente:"https://www.nasa.gov/",nota:""},
+ {fecha:"2025-03-06",cuando:"6 de marzo de 2025",titulo:"Athena llega cerca del polo sur lunar",cat:"exploracion",lugar:"Polo sur de la Luna",texto:"La misión IM-2 de Intuitive Machines tuvo dificultades tras el aterrizaje, pero avanzó en la exploración de zonas donde podría haber hielo de agua.",img:"athena-im2.jpg",fuente:"https://www.nasa.gov/",nota:""},
+ {fecha:"2025-03-14",cuando:"14 de marzo de 2025",titulo:"Eclipse lunar total: la primera Luna de sangre",cat:"fenomeno",lugar:"Gran parte de América, incluida Colombia",texto:"La Luna se tiñó de tonos cobrizos durante un eclipse total, visible desde el continente si el clima lo permitía.",img:"eclipse-lunar-2025-03.jpg",fuente:"https://science.nasa.gov/",nota:""},
+ {fecha:"2025-03-19",cuando:"19 de marzo de 2025",titulo:"Euclid muestra un mar de galaxias",cat:"descubrimiento",lugar:"Agencia Espacial Europea",texto:"Nuevos datos del telescopio Euclid permitieron estudiar cientos de miles de galaxias y avanzar en la búsqueda de la materia y la energía oscuras.",img:"euclid.jpg",fuente:"https://www.esa.int/",nota:""},
+ {fecha:"2025-03-29",cuando:"29 de marzo de 2025",titulo:"Eclipse solar parcial",cat:"fenomeno",lugar:"Europa, norte de África y Norteamérica (no visible en Colombia)",texto:"La Luna cubrió parte del disco solar en el hemisferio norte. Desde aquí no se vio, pero ocurrió mientras mirábamos otro cielo.",img:"eclipse-solar-parcial-2025.jpg",fuente:"https://science.nasa.gov/",nota:""},
+ {fecha:"2025-07-01",cuando:"1 de julio de 2025",titulo:"Se descubre el cometa interestelar 3I/ATLAS",cat:"descubrimiento",lugar:"Más allá del sistema solar",texto:"El tercer objeto interestelar confirmado atravesó nuestro sistema solar, trayendo material formado alrededor de otra estrella.",img:"3i-atlas.jpg",fuente:"https://www.nasa.gov/",nota:""},
+ {fecha:"2025-09-07",cuando:"7 de septiembre de 2025",titulo:"Segundo eclipse lunar total del año",cat:"fenomeno",lugar:"Asia, África, Europa y Oceanía (no visible en Colombia)",texto:"Otra Luna de sangre, esta vez sobre el otro lado del mundo.",img:"eclipse-lunar-2025-09.jpg",fuente:"https://science.nasa.gov/",nota:""},
+ {fecha:"2025-11-02",cuando:"2 de noviembre de 2025",titulo:"25 años de presencia humana en la Estación Espacial",cat:"hito",lugar:"Órbita terrestre",texto:"Desde la primera expedición permanente en noviembre de 2000, siempre ha habido personas viviendo en órbita.",img:"iss-25.jpg",fuente:"https://www.nasa.gov/",nota:""},
+ {fecha:"2026-02-28",cuando:"28 de febrero de 2026",titulo:"Seis planetas en una misma región del cielo",cat:"fenomeno",lugar:"Cielo del atardecer",texto:"Mercurio, Venus, Saturno, Neptuno, Urano y Júpiter coincidieron en el cielo. Algunos se vieron a simple vista; otros pidieron instrumentos.",img:"planetas-2026.jpg",fuente:"https://science.nasa.gov/",nota:""},
+ {fecha:"2026-03-03",cuando:"3 de marzo de 2026",titulo:"Eclipse lunar total",cat:"fenomeno",lugar:"Asia, Australia, Pacífico y parte de América",texto:"Fue total a escala global; desde Colombia solo se alcanzaron a ver las fases parciales, según el horizonte.",img:"eclipse-lunar-2026-03.jpg",fuente:"https://science.nasa.gov/",nota:""},
+ {fecha:"2026-04-01",cuando:"1 al 10 de abril de 2026",titulo:"Artemis II da la vuelta a la Luna",cat:"hito",lugar:"Nave Orion",texto:"Cuatro astronautas viajaron alrededor de la Luna, el primer viaje humano así en más de 50 años. Regresaron a salvo el 10 de abril.",img:"artemis-ii.jpg",fuente:"https://www.nasa.gov/",nota:""},
+ {fecha:"2026-08-12",cuando:"12 de agosto de 2026",titulo:"Eclipse solar total",cat:"fenomeno",lugar:"Groenlandia, Islandia y España (no visible en Colombia)",texto:"La sombra de la Luna recorrió el Atlántico norte y el día se oscureció unos minutos donde fue total.",img:"eclipse-solar-2026.jpg",fuente:"https://science.nasa.gov/",nota:""},
+ {fecha:"2026-08-13",cuando:"12–13 de agosto de 2026",titulo:"Máximo de las Perseidas",cat:"fenomeno",lugar:"Todo el mundo, mejor en el hemisferio norte",texto:"Polvo del cometa Swift-Tuttle encendiéndose al entrar en la atmósfera, con Luna nueva a favor.",img:"perseidas-2026.jpg",fuente:"https://science.nasa.gov/",nota:""},
+ {fecha:"2026-08-27",cuando:"27–28 de agosto de 2026",titulo:"La Luna roja que se vio desde Colombia",cat:"fenomeno",lugar:"Colombia y otras regiones",texto:"Un eclipse lunar parcial cubrió cerca del 93 % del diámetro lunar con la sombra de la Tierra, y gran parte de su superficie se tiñó de cobre.",img:"luna-roja-2026.jpg",fuente:"https://science.nasa.gov/",nota:"Una noche más en la que el universo nos regaló algo extraordinario."},
+ {fecha:"2026-09-28",cuando:"28 de septiembre de 2026",titulo:"Starship alcanza la órbita terrestre",cat:"exploracion",lugar:"SpaceX, vuelo de prueba 14",texto:"Por primera vez llegó a órbita y desplegó satélites Starlink. La misión terminó antes de lo previsto, pero cumplió un objetivo clave.",img:"starship.jpg",fuente:"https://apnews.com/",nota:""},
+ {fecha:"2026-10-04",cuando:"4 de octubre de 2026",titulo:"Saturno en oposición",cat:"fenomeno",lugar:"Visible casi toda la noche",texto:"La Tierra queda entre Saturno y el Sol, así que el planeta brilla más y se ve durante gran parte de la noche. Dos días antes del final del recorrido.",img:"saturno-oposicion.jpg",fuente:"https://science.nasa.gov/",nota:""}
+].sort((a,b)=>a.fecha.localeCompare(b.fecha));
+
+/* ====== LÓGICA ====== */
+const RANGOS = {
+  "2024":"Del 6 de octubre al 31 de diciembre",
+  "2025":"Un año de eclipses, descubrimientos y exploración lunar",
+  "2026":"Del 1 de enero al 6 de octubre"
+};
+let anio = "todos", cat = "todas";
+const $ = id => document.getElementById(id);
+
+function chips(contenedor, opciones, actual, alElegir){
+  contenedor.innerHTML = "";
+  opciones.forEach(([valor, texto]) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = texto;
+    b.setAttribute("aria-pressed", valor === actual);
+    b.onclick = () => alElegir(valor);
+    contenedor.appendChild(b);
+  });
+}
+
+function pintar(){
+  chips($("f-anio"), [["todos","Todos"], ...Object.keys(RANGOS).map(a=>[a,a])], anio, v=>{anio=v;pintar();});
+  chips($("f-cat"), [["todas","Todas"], ...Object.entries(CATEGORIAS)], cat, v=>{cat=v;pintar();});
+
+  const main = $("linea"); main.innerHTML = "";
+  let hay = false;
+  Object.keys(RANGOS).forEach(a => {
+    if (anio !== "todos" && anio !== a) return;
+    const lista = EVENTOS.filter(e => e.fecha.startsWith(a) && (cat === "todas" || e.cat === cat));
+    if (!lista.length) return;
+    hay = true;
+    const sec = document.createElement("section");
+    sec.className = "anio";
+    sec.innerHTML = `<h2>${a}</h2><p class="rango">${RANGOS[a]}</p><ol class="lista"></ol>`;
+    const ol = sec.querySelector("ol");
+    lista.forEach(e => {
+      const li = document.createElement("li");
+      li.className = "ev"; li.dataset.cat = e.cat;
+      li.innerHTML = `
+        <time datetime="${e.fecha}">${e.cuando}</time><span class="tipo">${CATEGORIAS[e.cat]}</span>
+        <h3></h3>
+        <div class="foto"><img loading="lazy" alt=""></div>
+        <p></p><p class="col"></p>
+        ${e.nota ? '<p class="nota"></p>' : ''}
+        <a class="fuente" target="_blank" rel="noopener">Ver fuente</a>`;
+      li.querySelector("h3").textContent = e.titulo;
+      li.querySelector("p").textContent = e.texto;
+      li.querySelector(".col").textContent = e.lugar;
+      if (e.nota) li.querySelector(".nota").textContent = e.nota;
+      li.querySelector(".fuente").href = e.fuente;
+      const img = li.querySelector("img");
+      img.alt = e.titulo;
+      img.src = "assets/" + e.img;
+      img.onerror = () => img.remove();   // si falta la imagen, queda el degradado
+      ol.appendChild(li);
+    });
+    main.appendChild(sec);
+  });
+  if (!hay) main.innerHTML = '<p class="vacio">No hay acontecimientos con esa combinación. Prueba con otra categoría u otro año.</p>';
+}
+
+const v = $("video");
+if (VIDEO_URL) { v.href = VIDEO_URL; }
+else { v.setAttribute("aria-disabled","true"); v.textContent = "El video llegará pronto"; }
+
+pintar();
+</script>
+</body>
+</html>
